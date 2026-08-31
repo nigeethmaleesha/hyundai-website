@@ -10,7 +10,6 @@
     "test:email": "node --env-file=.env server/testEmail.js"
   },
   "dependencies": {
-    "nodemailer": "^7.0.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
