@@ -77,9 +77,9 @@ export default function App() {
           <img src="/images/n-line-logo.png" className="nline-logo" alt="N Line" />
           <div className="header-right">
             <nav className="top-nav" aria-label="Main navigation">
-              <button onClick={() => scrollToId('highlights')}>Highlights</button>
+              {/* <button onClick={() => scrollToId('highlights')}>Highlights</button>
               <button onClick={() => scrollToId('360')}>Colours</button>
-              <button onClick={() => scrollToId('enquire')}>Enquire</button>
+              <button onClick={() => scrollToId('enquire')}>Enquire</button> */}
             </nav>
             <div className="header-icons" aria-label="Header shortcuts">
               <button type="button" aria-label="Search"><Icon name="search" size={20} strokeWidth={1.45} /></button>
