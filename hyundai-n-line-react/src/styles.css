@@ -17,8 +17,28 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
-body { margin: 0; min-width: 320px; background: #fff; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  scrollbar-width: none;       /* Firefox: hide page scrollbar */
+  -ms-overflow-style: none;    /* Legacy Edge / IE */
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #fff;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Keep normal mouse-wheel/touch scrolling, but hide the visible side scrollbar. */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
 button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 img { max-width: 100%; display: block; }

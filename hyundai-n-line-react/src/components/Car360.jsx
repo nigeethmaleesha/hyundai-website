@@ -73,7 +73,7 @@ export default function Car360() {
         onPointerCancel={stopDrag}
         onPointerLeave={stopDrag}
       >
-        <img src={framePath(color, frame)} alt={`${active?.label ?? ''} Venue N Line 360 degree view`} draggable="false" />
+        <img src={framePath(color, frame)} alt={`${active?.label ?? ''} Creta N Line 360 degree view`} draggable="false" />
         <div className="drag-hint"><Icon name="rotate" size={15}/> Drag to rotate</div>
       </div>
       <div className="selected-colour">{active?.label}</div>

@@ -6,7 +6,7 @@ try {
     lastName: 'Test',
     email: process.env.GMAIL_USER || 'kamkanamlage394@gmail.com',
     mobile: '+94 TEST',
-    model: 'Venue N Line',
+    model: 'Creta N Line',
     showroom: 'Abans Auto — Colombo',
     message: 'This is a Hyundai Website SMTP test email. If you received this, the Gmail App Password configuration is working.',
     consent: true,
