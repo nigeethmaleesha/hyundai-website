@@ -878,13 +878,13 @@ a { color: inherit; text-decoration: none; }
   .hyundai-logo, .hyundai-logo img { width: 98px; }
   .nline-logo { width: 74px; }
 
-  .hero { min-height: 620px; }
-  .hero-inner { min-height: 620px; padding-top: 24px; padding-bottom: 250px; }
+  .hero { min-height: 500px; }
+  .hero-inner { min-height: 500px; padding-top: 24px; padding-bottom: 205px; }
   .hero-kicker { font-size: 13px; }
   .hero h1 { font-size: clamp(38px, 11.6vw, 56px); line-height: .94; }
   .hero-buttons { display: grid; grid-template-columns: 1fr 1fr; width: 100%; gap: 8px; margin-top: 20px; }
   .hero-buttons .btn { width: 100%; min-width: 0; min-height: 42px; padding-inline: 8px; font-size: 10px; }
-  .hero-car { width: min(128vw, 565px); bottom: 14px; }
+  .hero-car { width: min(128vw, 565px); bottom: 45px; }
 
   .sport-copy h2 { font-size: 29px; }
   .sport-copy p { font-size: 13px; }
@@ -923,47 +923,69 @@ a { color: inherit; text-decoration: none; }
 
   .ready-actions { display: grid; grid-template-columns: 1fr; }
   .ready-actions .btn { width: 100%; }
-  .footer { padding: 32px 0 30px; }
+  .footer { padding: 30px 0 34px; }
 
   .footer .hyundai-logo {
-    width: 185px;
-    margin-bottom: 16px;
+    width: 175px;
+    margin-bottom: 15px;
   }
 
   .footer .hyundai-logo img {
-    width: 185px;
+    width: 175px;
   }
 
   .footer-grid {
-    gap: 24px;
+    gap: 26px;
   }
 
   .footer small {
-    max-width: 100%;
-    font-size: 13px;
+    max-width: 270px;
+    font-size: 12.5px;
+    line-height: 1.55;
   }
 
   .footer-links {
     width: 100%;
-    column-gap: 20px;
-    row-gap: 13px;
+    max-width: 330px;
+    column-gap: 30px;
+    row-gap: 15px;
   }
 
   .footer-links button {
     font-size: 12.5px;
+    line-height: 1.3;
   }
 }
 
 /* VERY SMALL PHONES */
 @media (max-width: 380px) {
-  .hero { min-height: 600px; }
-  .hero-inner { min-height: 600px; padding-bottom: 238px; }
+  .hero { min-height: 540px; }
+  .hero-inner { min-height: 540px; padding-bottom: 220px; }
   .hero h1 { font-size: 37px; }
-  .hero-car { width: min(134vw, 520px); bottom: 14px; }
+  .hero-car { width: min(134vw, 520px); bottom: 34px; }
   .hero-buttons { grid-template-columns: 1fr; }
   .highlight-grid { grid-template-columns: 1fr; }
   .tech-grid { grid-template-columns: 1fr; }
   .viewer-actions { grid-template-columns: 1fr; }
+
+  .footer .hyundai-logo,
+  .footer .hyundai-logo img {
+    width: 165px;
+  }
+
+  .footer small {
+    max-width: 250px;
+    font-size: 12px;
+  }
+
+  .footer-links {
+    column-gap: 18px;
+    row-gap: 14px;
+  }
+
+  .footer-links button {
+    font-size: 12px;
+  }
 }
 
 
