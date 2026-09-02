@@ -6279,3 +6279,34 @@ body::-webkit-scrollbar {
 .footer small {
   color: #FFFFFF !important;
 }
+
+/* ========================================================================== */
+/* FINAL FIGMA CORRECTION — FOOTER NAVIGATION LINKS                          */
+/* Privacy Policy / Terms of Use / Sitemap / Contact Us = #FFFFFF            */
+/* ========================================================================== */
+
+.footer-links button,
+.footer-links button:link,
+.footer-links button:visited,
+.footer-links a,
+.footer-links a:link,
+.footer-links a:visited,
+.footer a,
+.footer a:link,
+.footer a:visited {
+  color: #FFFFFF !important;
+  text-decoration-color: #FFFFFF !important;
+}
+
+.footer-links button:hover,
+.footer-links button:focus,
+.footer-links button:active,
+.footer-links a:hover,
+.footer-links a:focus,
+.footer-links a:active,
+.footer a:hover,
+.footer a:focus,
+.footer a:active {
+  color: #FFFFFF !important;
+  text-decoration-color: #FFFFFF !important;
+}
