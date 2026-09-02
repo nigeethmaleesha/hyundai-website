@@ -48,6 +48,7 @@ export function Icon({ name, size = 22, strokeWidth = 1.8, className = '' }) {
     search: <><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></>,
     share: <><circle cx="18" cy="5" r="2.2"/><circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="19" r="2.2"/><path d="m8 11 7.8-4.6M8 13l7.8 4.6"/></>,
     user: <><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></>,
+    whatsapp: <><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7A8.5 8.5 0 1 1 20.5 11.7Z"/><path d="M8.1 7.4c.2-.5.5-.5.8-.5h.5l1 2.3-.7.9c-.2.2-.1.4 0 .6.7 1.3 1.7 2.3 3 2.9.3.1.5.1.7-.1l.9-1.1 2.3 1.1c.3.2.4.3.3.6-.2.8-1.5 1.5-2.3 1.5-1.1.1-2.6-.4-4.4-2-1.5-1.4-2.6-3.1-2.8-4.4-.1-.7.2-1.3.7-1.8Z"/></>,
   }
 
   return <svg {...common}>{paths[name] || paths.arrow}</svg>

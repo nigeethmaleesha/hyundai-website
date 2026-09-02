@@ -1,6 +1,6 @@
 export const SITE = {
-  modelName: 'Creta N Line',
-  modelKicker: 'CRETA N Line',
+  modelName: 'VENUE N Line',
+  modelKicker: 'VENUE N Line',
   recipientEmail: 'kamkanamlage394@gmail.com',
   showroom: 'Abans Auto — Colombo',
   brochureUrl: '',

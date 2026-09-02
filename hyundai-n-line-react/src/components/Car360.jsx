@@ -16,8 +16,8 @@ const COLOR_OPTIONS = [
 
 const framePath = (color, frame) => `/360/${color}/${String(frame).padStart(2, '0')}.png`
 
-export default function Car360() {
-  const [color, setColor] = useState('abyss-black')
+export default function Car360({ compact = false, showSwatches = true, initialColor = 'abyss-black', className = '' }) {
+  const [color, setColor] = useState(initialColor)
   const [frame, setFrame] = useState(DEFAULT_FRAME)
   const [dragging, setDragging] = useState(false)
   const drag = useRef({ x: 0, frame: DEFAULT_FRAME })
@@ -55,38 +55,52 @@ export default function Car360() {
 
   const stopDrag = () => setDragging(false)
 
+  const onKeyDown = (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    const direction = event.key === 'ArrowLeft' ? -1 : 1
+    setFrame((current) => ((current + direction) % 36 + 36) % 36)
+  }
+
   const changeColor = (nextColor) => {
     setColor(nextColor)
     setFrame(DEFAULT_FRAME)
   }
 
   return (
-    <div className="car360-shell">
-      <div className="swatches" aria-label="Vehicle colours">
-        {COLOR_OPTIONS.map((item) => (
-          <button
-            key={item.id}
-            className={`swatch ${color === item.id ? 'active' : ''}`}
-            style={{ background: item.swatch }}
-            title={item.label}
-            aria-label={item.label}
-            aria-pressed={color === item.id}
-            onClick={() => changeColor(item.id)}
-          />
-        ))}
-      </div>
+    <div className={`car360-shell ${compact ? 'car360-compact' : ''} ${className}`.trim()}>
+      {showSwatches && (
+        <div className="swatches" aria-label="Vehicle colours">
+          {COLOR_OPTIONS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`swatch ${color === item.id ? 'active' : ''}`}
+              style={{ background: item.swatch }}
+              title={item.label}
+              aria-label={item.label}
+              aria-pressed={color === item.id}
+              onClick={() => changeColor(item.id)}
+            />
+          ))}
+        </div>
+      )}
 
       <div
         className={`viewer360 ${dragging ? 'dragging' : ''}`}
+        role="application"
+        tabIndex="0"
+        aria-label="Interactive 360 degree vehicle view. Drag horizontally or use the left and right arrow keys to rotate."
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={stopDrag}
         onPointerCancel={stopDrag}
         onPointerLeave={stopDrag}
+        onKeyDown={onKeyDown}
       >
         <img
           src={framePath(color, frame)}
-          alt={`${active?.label ?? ''} Creta N Line 360 degree view`}
+          alt={`${active?.label ?? ''} VENUE N Line 360 degree view`}
           draggable="false"
         />
         <div className="drag-hint"><Icon name="rotate" size={15} /> Drag to rotate</div>

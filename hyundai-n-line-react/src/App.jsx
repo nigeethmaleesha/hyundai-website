@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import HyundaiLogo from './components/HyundaiLogo.jsx'
 import Button from './components/Button.jsx'
 import SectionTitle from './components/SectionTitle.jsx'
@@ -9,35 +9,35 @@ import { Icon } from './icons.jsx'
 import { SITE } from './config.js'
 
 const highlights = [
-  { image: '/images/highlight-led.png', label: <>Twin Horn<br />LED DRLs</> },
-  { image: '/images/alloy.png', label: <>Diamond-Cut<br />N Alloys</> },
-  { image: '/images/steering.png', label: <>N Line Steering<br />Wheel</> },
-  { image: '/images/gear.png', label: <>N Line<br />Gear Knob</> },
+  { image: '/images/highlight-led-exact.jpg', label: 'Twin Horn LED DRLs' },
+  { image: '/images/highlight-alloy-exact.jpg', label: 'Diamond-Cut N Alloys' },
+  { image: '/images/highlight-steering-exact.jpg', label: 'N Line Steering Wheel' },
+  { image: '/images/highlight-gear-exact.jpg', label: 'N Line Gear Knob' },
 ]
 
 const performance = [
   {
-    icon: 'engine',
+    iconImage: '/images/icons/powertrain.jpg',
     title: 'Powertrain',
     text: '1.5L Turbo GDi petrol engine producing up to 160 PS and 253 Nm of torque.',
   },
   {
-    icon: 'transmission',
+    iconImage: '/images/icons/transmission.jpg',
     title: 'Transmission',
     text: '6-speed manual or 7-speed dual-clutch automatic (DCT), depending on grade.',
   },
   {
-    icon: 'mode',
+    iconImage: '/images/icons/drive-modes.jpg',
     title: 'Drive Modes',
     text: 'Selectable drive modes (Eco, Normal, Sport) to match your mood on the road.',
   },
 ]
 
 const tech = [
-  { icon: 'screen', title: '10.25” Touchscreen Infotainment' },
-  { icon: 'connected', title: 'Bluelink Connected Car' },
-  { icon: 'wireless', title: 'Wireless Phone Connectivity' },
-  { icon: 'fan', title: 'Automatic Climate Control' },
+  { iconImage: '/images/icons/touchscreen.jpg', title: '10.25" Touchscreen Infotainment' },
+  { iconImage: '/images/icons/connected.jpg', title: 'Bluelink Connected Car' },
+  { iconImage: '/images/icons/wireless.jpg', title: 'Wireless Phone Connectivity' },
+  { iconImage: '/images/icons/climate.jpg', title: 'Automatic Climate Control' },
 ]
 
 const safetyLeft = [
@@ -71,6 +71,8 @@ function SliderDots({ count = 8, showArrow = false }) {
 
 export default function App() {
   const brochureToast = useRef(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeNav, setActiveNav] = useState('n-line')
 
   const brochure = (event) => {
     if (SITE.brochureUrl) return
@@ -97,7 +99,17 @@ export default function App() {
       scrollToId('ownership')
       return
     }
+    if (key === 'whatsapp') {
+      scrollToId('enquire')
+      return
+    }
     scrollToId('enquire')
+  }
+
+  const navigate = (id, navKey) => {
+    if (navKey) setActiveNav(navKey)
+    setMobileMenuOpen(false)
+    scrollToId(id)
   }
 
   return (
@@ -106,20 +118,67 @@ export default function App() {
         Brochure file/link can be connected as soon as it is provided.
       </div>
 
-      <header className="topbar">
-        <div className="container topbar-inner">
-          <HyundaiLogo />
-          <img src="/images/n-line-header-exact.png" className="nline-logo" alt="N Line" />
+      <div className="site-header">
+        <header className="topbar">
+          <div className="header-container topbar-inner">
+            <button className="brand-button" type="button" onClick={() => navigate('home', 'home')} aria-label="Go to home">
+              <HyundaiLogo />
+            </button>
 
-          <div className="header-right">
-            <div className="header-icons" aria-label="Header shortcuts">
-              <button type="button" aria-label="Search"><Icon name="search" size={20} strokeWidth={1.45} /></button>
-              <button type="button" aria-label="Share"><Icon name="share" size={20} strokeWidth={1.45} /></button>
-              <button type="button" aria-label="Account"><Icon name="user" size={21} strokeWidth={1.35} /></button>
+            <nav className="primary-nav" aria-label="Primary navigation">
+              <button className={activeNav === 'home' ? 'active' : ''} type="button" onClick={() => navigate('home', 'home')}>Home</button>
+              <button className={activeNav === 'vehicles' ? 'active' : ''} type="button" onClick={() => navigate('360', 'vehicles')}>Our Vehicles</button>
+              <button className={activeNav === 'n-line' ? 'active' : ''} type="button" onClick={() => navigate('home', 'n-line')}>N - Line</button>
+              <button className={activeNav === 'why' ? 'active' : ''} type="button" onClick={() => navigate('ownership', 'why')}>Why Hyundai</button>
+              <button className={activeNav === 'contact' ? 'active' : ''} type="button" onClick={() => navigate('enquire', 'contact')}>Contact Us</button>
+            </nav>
+
+            <div className="header-right">
+              <div className="header-icons" aria-label="Header shortcuts">
+                <button type="button" aria-label="Search"><Icon name="search" size={18} strokeWidth={1.45} /></button>
+                <button type="button" aria-label="Share"><Icon name="share" size={18} strokeWidth={1.45} /></button>
+                <button type="button" aria-label="Account"><Icon name="user" size={19} strokeWidth={1.35} /></button>
+              </div>
+              <button
+                className={`menu-toggle ${mobileMenuOpen ? 'open' : ''}`}
+                type="button"
+                aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
+                aria-expanded={mobileMenuOpen}
+                onClick={() => setMobileMenuOpen((open) => !open)}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
             </div>
           </div>
+        </header>
+
+        <div className="modelbar">
+          <div className="header-container modelbar-inner">
+            <button className="model-brand" type="button" onClick={() => navigate('home')} aria-label="VENUE N Line home">
+              <img src="/images/n-line-header-exact.png" className="nline-logo" alt="N Line" />
+            </button>
+            <nav className="model-nav" aria-label="Model navigation">
+              <button type="button" onClick={() => navigate('exterior')}>Exterior</button>
+              <button type="button" onClick={() => navigate('interior')}>Interior</button>
+              <button type="button" onClick={() => navigate('technology')}>Technology</button>
+              <button className="model-cta" type="button" onClick={() => navigate('enquire')}>Book A Test Drive</button>
+            </nav>
+          </div>
         </div>
-      </header>
+
+        <nav className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`} aria-label="Mobile navigation">
+          <button className={activeNav === 'home' ? 'active' : ''} type="button" onClick={() => navigate('home', 'home')}>Home</button>
+          <button className={activeNav === 'vehicles' ? 'active' : ''} type="button" onClick={() => navigate('360', 'vehicles')}>Our Vehicles</button>
+          <button className={activeNav === 'n-line' ? 'active' : ''} type="button" onClick={() => navigate('home', 'n-line')}>N - Line</button>
+          <button type="button" onClick={() => navigate('exterior')}>Exterior</button>
+          <button type="button" onClick={() => navigate('interior')}>Interior</button>
+          <button type="button" onClick={() => navigate('technology')}>Technology</button>
+          <button className={activeNav === 'why' ? 'active' : ''} type="button" onClick={() => navigate('ownership', 'why')}>Why Hyundai</button>
+          <button className={activeNav === 'contact' ? 'active' : ''} type="button" onClick={() => navigate('enquire', 'contact')}>Contact Us</button>
+        </nav>
+      </div>
 
       <section className="hero" id="home">
         <div className="container hero-inner">
@@ -156,7 +215,7 @@ export default function App() {
           </div>
 
           <div className="sport-image-wrap">
-            <img src="/images/sport-black-cropped.png" alt={`Black ${SITE.modelName}`} />
+            <Car360 compact showSwatches={false} initialColor="abyss-black" />
           </div>
         </div>
       </section>
@@ -166,10 +225,10 @@ export default function App() {
           <SectionTitle ghost="Key Highlights" title="Designed to make a statement." />
 
           <div className="highlight-grid">
-            {highlights.map((item, index) => (
-              <article className="highlight-card" key={index}>
-                <img src={item.image} alt="" />
-                <div>{item.label}</div>
+            {highlights.map((item) => (
+              <article className="highlight-card exact-card" key={item.label}>
+                <img src={item.image} alt={item.label} />
+                <span className="sr-only">{item.label}</span>
               </article>
             ))}
           </div>
@@ -183,7 +242,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="section design-intro" id="design">
+      <section className="section design-intro" id="exterior">
         <div className="container">
           <SectionTitle
             ghost="Exterior Design"
@@ -208,12 +267,12 @@ export default function App() {
         </div>
       </section>
 
-      <section className="section interior-section">
+      <section className="section interior-section" id="interior">
         <div className="container">
           <SectionTitle ghost="Interior Comfort" title="Step inside. Feel the difference." />
 
           <div className="interior-main-grid">
-            <img src="/images/interior-road.png" alt={`${SITE.modelName} in motion`} />
+            <img src="/images/interior-road-exact.jpg" alt={`${SITE.modelName} in motion`} />
             <div>
               <h3>Driver-Focused Cabin</h3>
               <p>Step inside and the sporty intent continues. Black surfaces with red stitching, metal pedals and an N-branded steering wheel put you in the mood before you&apos;ve even started the engine — while Creta&apos;s everyday space and comfort stay exactly where they should be.</p>
@@ -222,15 +281,15 @@ export default function App() {
 
           <div className="interior-cards">
             <article>
-              <div className="slant-card"><img src="/images/gear-framed.png" alt="Sliding center console" /></div>
+              <div className="slant-card"><img src="/images/gear-framed-exact.jpg" alt="Sliding center console" /></div>
               <span>Sliding center console</span>
             </article>
             <article>
-              <div className="slant-card"><img src="/images/seats-framed.png" alt="Relaxation comfort seats" /></div>
+              <div className="slant-card"><img src="/images/seats-framed-exact.jpg" alt="Relaxation comfort seats" /></div>
               <span>Relaxation comfort seats</span>
             </article>
             <article>
-              <div className="slant-card"><img src="/images/steering-framed.png" alt="Dual displays and steering wheel" /></div>
+              <div className="slant-card"><img src="/images/steering-framed-exact.jpg" alt="Dual displays and steering wheel" /></div>
               <span>Dual 12.3-inch displays</span>
             </article>
           </div>
@@ -249,7 +308,7 @@ export default function App() {
           <div className="info-card-grid three">
             {performance.map((item) => (
               <article className="info-card" key={item.title}>
-                <Icon name={item.icon} size={38} strokeWidth={1.65} />
+                <img className="feature-icon performance-icon" src={item.iconImage} alt="" aria-hidden="true" />
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </article>
@@ -258,13 +317,13 @@ export default function App() {
         </div>
       </section>
 
-      <section className="section tech-section">
+      <section className="section tech-section" id="technology">
         <div className="container">
           <SectionTitle ghost="Convenience & Technology" title="Technology that moves with you." />
           <div className="tech-grid">
             {tech.map((item) => (
               <article className="tech-card" key={item.title}>
-                <Icon name={item.icon} size={30} strokeWidth={1.7} />
+                <img className="feature-icon technology-icon" src={item.iconImage} alt="" aria-hidden="true" />
                 <span>{item.title}</span>
               </article>
             ))}
@@ -278,9 +337,9 @@ export default function App() {
 
           <div className="safety-grid">
             <article className="safety-card">
-              <img src="/images/safety-airbags.png" alt="Six airbags safety illustration" />
+              <img src="/images/safety-airbags-exact.jpg" alt="Six airbags safety illustration" />
               <div className="safety-content">
-                <h3><Icon name="shield" size={28} strokeWidth={1.8} />Core Safety</h3>
+                <h3><img className="feature-icon safety-icon" src="/images/icons/core-safety.jpg" alt="" aria-hidden="true" />Core Safety</h3>
                 <ul>
                   {safetyLeft.map((text) => <li key={text}><Icon name="checkCircle" size={15} strokeWidth={1.8} /><span>{text}</span></li>)}
                 </ul>
@@ -288,9 +347,9 @@ export default function App() {
             </article>
 
             <article className="safety-card">
-              <img src="/images/safety-sensors.png" alt="Driver assistance illustration" />
+              <img src="/images/safety-sensors-exact.jpg" alt="Driver assistance illustration" />
               <div className="safety-content">
-                <h3><Icon name="eye" size={28} strokeWidth={1.8} />Driver Assist &amp; Monitoring</h3>
+                <h3><img className="feature-icon safety-icon" src="/images/icons/driver-assist.jpg" alt="" aria-hidden="true" />Driver Assist &amp; Monitoring</h3>
                 <ul>
                   {safetyRight.map((text) => <li key={text}><Icon name="checkCircle" size={15} strokeWidth={1.8} /><span>{text}</span></li>)}
                 </ul>
@@ -316,17 +375,17 @@ export default function App() {
           <SectionTitle title="Warranty & Ownership" />
           <div className="info-card-grid three ownership-grid">
             <article className="info-card">
-              <Icon name="warranty" size={38} strokeWidth={1.8} />
+              <img className="feature-icon ownership-icon" src="/images/icons/warranty.jpg" alt="" aria-hidden="true" />
               <h3>Warranty Term</h3>
               <p>Manufacturer warranty terms to be confirmed with Hyundai Sri Lanka (Abans Auto).</p>
             </article>
             <article className="info-card">
-              <Icon name="service" size={38} strokeWidth={1.8} />
+              <img className="feature-icon ownership-icon" src="/images/icons/service-package.jpg" alt="" aria-hidden="true" />
               <h3>Service Package</h3>
               <p>Scheduled maintenance package details to be confirmed with Abans Auto.</p>
             </article>
             <article className="info-card">
-              <Icon name="roadside" size={38} strokeWidth={1.8} />
+              <img className="feature-icon ownership-icon" src="/images/icons/roadside-assist.jpg" alt="" aria-hidden="true" />
               <h3>Roadside Assist</h3>
               <p>Roadside assistance terms to be confirmed with Abans Auto.</p>
             </article>

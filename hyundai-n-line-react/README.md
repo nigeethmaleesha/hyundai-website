@@ -1,4 +1,4 @@
-# Hyundai Creta N Line — React landing page
+# Hyundai VENUE N Line — React landing page
 
 ## Run locally
 
