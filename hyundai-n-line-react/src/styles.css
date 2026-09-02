@@ -35,8 +35,8 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 
 .container {
-  width: min(1440px, calc(100% - 96px));
   margin-inline: auto;
+  width: min(1280px, calc(100% - 80px));
 }
 .container.narrow { width: min(1020px, calc(100% - 96px)); }
 .section { padding: 96px 0; }
@@ -125,6 +125,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   height: 100%;
   padding-top: 48px;
+  margin-left: 50px;
 }
 .hero-copy { position: relative; z-index: 5; }
 .hero-kicker {
@@ -992,9 +993,6 @@ a { color: inherit; text-decoration: none; }
 /* RESPONSIVE PRECISION PASS - supplied desktop and icon references           */
 /* ========================================================================== */
 
-.container {
-  width: min(1600px, calc(100% - 64px));
-}
 
 .container.narrow {
   width: min(1000px, calc(100% - 64px));
@@ -1505,9 +1503,7 @@ body::-webkit-scrollbar {
   border: 0;
 }
 
-.container {
-  width: min(1280px, calc(100% - 80px));
-}
+
 
 .container.narrow {
   width: min(916px, calc(100% - 80px));
@@ -2557,9 +2553,6 @@ body::-webkit-scrollbar {
 }
 
 /* Final reference corrections. Kept last so these values win at every size. */
-.container {
-  width: min(1480px, calc(100% - 80px));
-}
 
 .container.narrow {
   width: min(1000px, calc(100% - 80px));
@@ -2824,5 +2817,166 @@ body::-webkit-scrollbar {
 
   .car360-compact .drag-hint {
     bottom: 6px;
+  }
+}
+/* ========================================================================== */
+/* FINAL FIGMA-EXACT SECTION HEADING FIX                                      */
+/* Matches the Figma heading weight/tracking/overlap without changing the     */
+/* section padding values that are already correct.                           */
+/* ========================================================================== */
+
+.section-title-wrap {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  overflow: visible;
+  max-width: 1680px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+/* Pale background heading — keep the larger Figma-style ghost title. */
+.ghost-title {
+  position: absolute;
+  z-index: 0;
+  top: -50px;
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: none;
+  transform: translateX(-50%);
+  color: #e3e7eb;
+  opacity: 1;
+  font-size: 104px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.eyebrow,
+.section-title,
+.section-subtitle {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+ * Figma foreground title:
+ * - Semi-bold instead of the heavier web bold
+ * - Relaxed tracking instead of the very tight -0.042em
+ * - Slightly lower overlap over the ghost title
+ */
+.section-title {
+  margin: 0;
+  color: var(--navy);
+  font-family: "Poppins", "Avenir Next", "Century Gothic", Arial, sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  transform: translateY(8px);
+}
+
+/* Keep subtitles aligned with the visually lowered Figma heading. */
+.section-subtitle {
+  transform: translateY(8px);
+}
+
+/* Figma desktop / laptop scale */
+@media (max-width: 1600px) {
+  .section-title {
+    font-size: 44px;
+  }
+
+  .ghost-title {
+    top: -42px;
+    font-size: 88px;
+  }
+}
+
+/* Small laptop / tablet landscape */
+@media (max-width: 1180px) {
+  .section-title-wrap {
+    margin-bottom: 54px;
+  }
+
+  .section-title {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transform: translateY(8px);
+  }
+
+  .ghost-title {
+    top: -38px;
+    font-size: 78px;
+  }
+}
+
+/* Tablet / mobile portrait */
+@media (max-width: 820px) {
+  .section-title-wrap {
+    margin-bottom: 46px;
+  }
+
+  .section-title {
+    font-size: 34px;
+    letter-spacing: -0.008em;
+    transform: translateY(6px);
+  }
+
+  .section-subtitle {
+    transform: translateY(6px);
+  }
+
+  .ghost-title {
+    top: -30px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    padding-inline: 8px;
+    font-size: 58px;
+    line-height: 0.96;
+    white-space: normal;
+  }
+}
+
+/* Phones */
+@media (max-width: 520px) {
+  .section-title-wrap {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 30px;
+    letter-spacing: -0.006em;
+    transform: translateY(5px);
+  }
+
+  .section-subtitle {
+    transform: translateY(5px);
+  }
+
+  .ghost-title {
+    top: -30px;
+    font-size: 48px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .section-title {
+    font-size: 28px;
+  }
+
+  .ghost-title {
+    top: -26px;
+    font-size: 42px;
   }
 }
