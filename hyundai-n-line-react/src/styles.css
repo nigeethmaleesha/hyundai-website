@@ -6056,3 +6056,46 @@ body::-webkit-scrollbar {
     white-space: nowrap !important;
   }
 }
+
+/* ========================================================================== */
+/* FINAL FIGMA MATCH — COLOURS & 360° SWATCH SIZE                            */
+/* ========================================================================== */
+
+/*
+   Figma reference:
+   - desktop swatches are intentionally much larger than the earlier 25px pass
+   - the row keeps the same centered alignment
+   - only the colour selector sizing/spacing is corrected here
+   - the viewer, car, header and the rest of the page remain unchanged
+*/
+@media (min-width: 1181px) {
+  .viewer-section .swatches {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+
+    gap: 18px !important;
+    margin-top: 0 !important;
+    margin-bottom: 30px !important;
+  }
+
+  .viewer-section .swatch {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    flex: 0 0 44px !important;
+
+    padding: 0 !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 50% !important;
+
+    box-shadow: 0 0 0 1px #c7ccd1 !important;
+  }
+
+  .viewer-section .swatch.active {
+    box-shadow: 0 0 0 2px var(--navy) !important;
+  }
+}
+
